@@ -2,12 +2,12 @@ package com.avaliacao.azship.dominio.dtos;
 
 public class FreteDTO {
 	private Long id;
-    private ClienteDTO cliente; 
+    private Long cliente; 
     private String origem;
     private String destino;
     
     
-    public FreteDTO(Long id, ClienteDTO cliente,String origem, String destino) {
+    public FreteDTO(Long id, Long cliente, String origem, String destino) {
         this.setId(id);
         this.setCliente(cliente);
         this.setOrigem(origem);
@@ -21,10 +21,10 @@ public class FreteDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public ClienteDTO getCliente() {
+	public Long getCliente() {
 		return cliente;
 	}
-	public void setCliente(ClienteDTO cliente) {
+	public void setCliente(Long cliente) {
 		this.cliente = cliente;
 	}
 	public String getOrigem() {

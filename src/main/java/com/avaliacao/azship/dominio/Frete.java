@@ -5,14 +5,14 @@ import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
 
 public class Frete {
 	private Long id;
-    private Cliente cliente; 
+    private Long cliente; 
     private String origem;
     private String destino;
     
     public Frete() {
     }
 
-    public Frete(Long id, Cliente cliente, String origem, String destino) {
+    public Frete(Long id, Long cliente, String origem, String destino) {
         this.setId(id);
         this.setCliente(cliente);
         this.setOrigem(origem);
@@ -20,12 +20,17 @@ public class Frete {
     }
 
     public Frete(FreteDTO freteDTO) {
-      	  Cliente cliente = new Cliente(freteDTO.getCliente());
+     
     	  this.setId(freteDTO.getId());
-          this.setCliente(cliente);
+          this.setCliente(freteDTO.getCliente());
           this.setOrigem(freteDTO.getOrigem());
           this.setDestino(freteDTO.getDestino());
     }
+    
+    public FreteDTO toFrete() {
+        return new FreteDTO(this.getId(), this.getCliente(), this.getOrigem(), this.getDestino());
+    }
+
     
     public Long getId() {
 		return id;
@@ -33,10 +38,10 @@ public class Frete {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public Cliente getCliente() {
+	public Long getCliente() {
 		return cliente;
 	}
-	public void setCliente(Cliente cliente) {
+	public void setCliente(Long cliente) {
 		this.cliente = cliente;
 	}
 	public String getOrigem() {

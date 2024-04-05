@@ -29,17 +29,21 @@ public class FreteEntity {
 	public FreteEntity() {
     }
 
-    public FreteEntity(Frete frete) {
-    	ClienteEntity cliente = new ClienteEntity(frete.getCliente());
-    	
+    public FreteEntity(Frete frete, ClienteEntity cliente) {
 		this.setId(frete.getId());
+		this.setCliente(cliente);
+		this.setOrigem(frete.getOrigem());
+		this.setDestino(frete.getDestino());
+    }
+    
+    public void updateInfo(Frete frete, ClienteEntity cliente) {
 		this.setCliente(cliente);
 		this.setOrigem(frete.getOrigem());
 		this.setDestino(frete.getDestino());
     }
 
     public Frete toFrete() {
-        return new Frete(this.getId(), this.getCliente().toCliente(), this.getOrigem(), this.getDestino());
+        return new Frete(this.getId(), this.getCliente().getId(), this.getOrigem(), this.getDestino());
     }
 
 	public Long getId() {

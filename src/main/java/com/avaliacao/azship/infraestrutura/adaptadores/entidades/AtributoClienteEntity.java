@@ -32,7 +32,7 @@ public class AtributoClienteEntity {
 
     
     public AtributoCliente toAtributoCliente() {
-        return new AtributoCliente(this.nome, this.valor);
+        return new AtributoCliente(this.id ,this.nome, this.valor);
     }
 
     public AtributoClienteDTO toAtributoClienteDTO() {

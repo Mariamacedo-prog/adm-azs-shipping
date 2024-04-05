@@ -1,8 +1,6 @@
 package com.avaliacao.azship.dominio.dtos;
 
-import java.util.List;
 
-import com.avaliacao.azship.dominio.Cliente;
 
 public class ClienteDTO {
 	private Long id;

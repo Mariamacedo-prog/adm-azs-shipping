@@ -3,6 +3,7 @@ package com.avaliacao.azship.dominio.dtos;
 import com.avaliacao.azship.dominio.AtributoCliente;
 
 public class AtributoClienteDTO {
+	private Long id;
     private String nome;
     private String valor;
     
@@ -12,7 +13,7 @@ public class AtributoClienteDTO {
 	}
        
     public AtributoCliente toAtributoCliente() {
-        return new AtributoCliente(this.nome, this.valor);
+        return new AtributoCliente(this.id, this.nome, this.valor);
     }
 
 	public String getNome() {

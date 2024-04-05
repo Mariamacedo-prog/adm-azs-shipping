@@ -1,17 +1,15 @@
 package com.avaliacao.azship.dominio;
-
-import java.util.List;
-
 import com.avaliacao.azship.dominio.dtos.ClienteDTO;
+import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
 
 
 public class Cliente {
 	private Long id;
-    private String nome; 
+    private String nome;
     
     public Cliente() {}
 
-    public Cliente(Long id, String nome, List<AtributoCliente> atributos) {
+    public Cliente(Long id, String nome) {
         this.setId(id);
         this.setNome(nome);
     }
@@ -20,6 +18,20 @@ public class Cliente {
         Cliente cliente = new Cliente();
         cliente.setId(clienteDTO.getId());
         cliente.setNome(clienteDTO.getNome());
+    }
+    
+    public static Cliente fromEntity(ClienteEntity clienteEntity) {
+        Cliente cliente = new Cliente();
+        cliente.setId(clienteEntity.getId());
+        cliente.setNome(clienteEntity.getNome());
+
+        return cliente;
+    }
+
+    public static ClienteEntity toEntity(Cliente cliente) {
+        ClienteEntity clienteEntity = new ClienteEntity(cliente);
+
+        return clienteEntity;
     }
 	
 	public Long getId() {
@@ -34,4 +46,5 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
+
 }
