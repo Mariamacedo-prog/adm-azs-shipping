@@ -1,5 +1,11 @@
 package com.avaliacao.azship.infraestrutura.adaptadores.entidades;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import com.avaliacao.azship.dominio.AtributoCliente;
+import com.avaliacao.azship.dominio.dtos.AtributoClienteDTO;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -21,6 +27,25 @@ public class AtributoClienteEntity {
     
     private String nome;
     private String valor;
+    
+    public AtributoClienteEntity() {}
+
+    
+    public AtributoCliente toAtributoCliente() {
+        return new AtributoCliente(this.nome, this.valor);
+    }
+
+    public AtributoClienteDTO toAtributoClienteDTO() {
+        return new AtributoClienteDTO(this.nome, this.valor);
+    }
+    
+    public static List<AtributoCliente> toAtributoClienteList(List<AtributoClienteEntity> atributoClienteEntities) {
+        List<AtributoCliente> atributoClientes = new ArrayList<>();
+        for (AtributoClienteEntity entity : atributoClienteEntities) {
+            atributoClientes.add(entity.toAtributoCliente());
+        }
+        return atributoClientes;
+    }
     
 	public Long getId() {
 		return id;

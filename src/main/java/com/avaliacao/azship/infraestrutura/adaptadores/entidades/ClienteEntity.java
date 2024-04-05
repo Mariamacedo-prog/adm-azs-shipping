@@ -2,6 +2,12 @@ package com.avaliacao.azship.infraestrutura.adaptadores.entidades;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import com.avaliacao.azship.dominio.AtributoCliente;
+import com.avaliacao.azship.dominio.Cliente;
+import com.avaliacao.azship.dominio.Frete;
+import com.avaliacao.azship.dominio.dtos.AtributoClienteDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -23,8 +29,40 @@ public class ClienteEntity {
     @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<AtributoClienteEntity> atributos = new ArrayList<>();
     
+    public Cliente toCliente() {
+        return new Cliente(this.getId(), this.getNome(), toAtributoClienteList(this.getAtributos()));
+    }
     
+    public ClienteEntity(Cliente cliente) {
+        this.id = cliente.getId();
+        this.nome = cliente.getNome();
+    }
 
+    private List<AtributoCliente> toAtributoClienteList(List<AtributoClienteEntity> atributos) {
+        return atributos.stream()
+                .map(atributoClienteEntity -> atributoClienteEntity.toAtributoCliente())
+                .collect(Collectors.toList());
+    }
+
+//    private List<AtributoClienteEntity> toAtributoClienteEntityList(List<AtributoCliente> atributos) {
+//        return atributos.stream()
+//                .map(atributoCliente -> new AtributoClienteEntity())
+//                .collect(Collectors.toList());
+//    }
+    
+    public List<AtributoCliente> toAtributoClienteModelList() {
+        return this.atributos.stream()
+                .map(AtributoClienteEntity::toAtributoCliente)
+                .collect(Collectors.toList());
+    }
+    
+    public List<AtributoClienteDTO> toAtributoClienteDTOList() {
+        return this.atributos.stream()
+                .map(AtributoClienteEntity::toAtributoClienteDTO)
+                .collect(Collectors.toList());
+    }
+
+    
 	public Long getId() {
 		return id;
 	}

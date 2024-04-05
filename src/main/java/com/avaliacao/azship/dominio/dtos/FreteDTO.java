@@ -1,15 +1,13 @@
 package com.avaliacao.azship.dominio.dtos;
 
-import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
-
 public class FreteDTO {
 	private Long id;
-    private ClienteEntity cliente; 
+    private ClienteDTO cliente; 
     private String origem;
     private String destino;
     
     
-    public FreteDTO(Long id, ClienteEntity cliente,String origem, String destino) {
+    public FreteDTO(Long id, ClienteDTO cliente,String origem, String destino) {
         this.setId(id);
         this.setCliente(cliente);
         this.setOrigem(origem);
@@ -23,10 +21,10 @@ public class FreteDTO {
 	public void setId(Long id) {
 		this.id = id;
 	}
-	public ClienteEntity getCliente() {
+	public ClienteDTO getCliente() {
 		return cliente;
 	}
-	public void setCliente(ClienteEntity cliente) {
+	public void setCliente(ClienteDTO cliente) {
 		this.cliente = cliente;
 	}
 	public String getOrigem() {

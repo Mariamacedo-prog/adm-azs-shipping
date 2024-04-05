@@ -1,5 +1,6 @@
 package com.avaliacao.azship.infraestrutura.adaptadores.entidades;
 
+import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.Frete;
 
 import jakarta.persistence.Entity;
@@ -29,14 +30,16 @@ public class FreteEntity {
     }
 
     public FreteEntity(Frete frete) {
-	  this.setId(frete.getId());
-	  this.setCliente(frete.getCliente());
-	  this.setOrigem(frete.getOrigem());
-	  this.setDestino(frete.getDestino());
+    	ClienteEntity cliente = new ClienteEntity(frete.getCliente());
+    	
+		this.setId(frete.getId());
+		this.setCliente(cliente);
+		this.setOrigem(frete.getOrigem());
+		this.setDestino(frete.getDestino());
     }
 
     public Frete toFrete() {
-        return new Frete(this.getId(), this.getCliente(), this.getOrigem(), this.getDestino());
+        return new Frete(this.getId(), this.getCliente().toCliente(), this.getOrigem(), this.getDestino());
     }
 
 	public Long getId() {
