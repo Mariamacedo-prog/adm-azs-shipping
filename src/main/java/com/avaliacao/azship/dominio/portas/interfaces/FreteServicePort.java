@@ -16,5 +16,5 @@ public interface FreteServicePort {
 	
 	void deleteById(Long id);
 
-	Page<Frete> findAllByOrigem(String origem, int page, int size);
+	Page<Frete> findAllByOrigem(String searchTerm, int page, int size);
 }

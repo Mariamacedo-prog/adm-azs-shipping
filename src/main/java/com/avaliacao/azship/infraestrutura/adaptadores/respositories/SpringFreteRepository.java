@@ -11,6 +11,8 @@ import com.avaliacao.azship.infraestrutura.adaptadores.entidades.FreteEntity;
 
 @Repository
 public interface SpringFreteRepository extends JpaRepository<FreteEntity, Long>{
-    @Query(value = "SELECT * FROM frete f WHERE f.destino LIKE %?1%", nativeQuery = true)
-	Page<FreteEntity> findAllByOrigem(Pageable pageable, String destino);
+	@Query(value = "SELECT * FROM frete f WHERE " +
+            "f.origem LIKE %?1% OR " +
+            "f.destino LIKE %?1% ", nativeQuery = true)
+	Page<FreteEntity> findAllByOrigem(Pageable pageable, String search);
 }

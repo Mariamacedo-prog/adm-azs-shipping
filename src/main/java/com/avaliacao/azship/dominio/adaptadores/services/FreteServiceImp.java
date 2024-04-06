@@ -44,10 +44,10 @@ public class FreteServiceImp  implements FreteServicePort{
     }
     
     @Override
-    public Page<Frete> findAllByOrigem(String destino, int page, int size) {
+    public Page<Frete> findAllByOrigem(String search, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
      
-        return freteRepository.findAllByOrigem(pageable, destino)
+        return freteRepository.findAllByOrigem(pageable, search)
                 .map(FreteEntity::toFrete);
   
     }

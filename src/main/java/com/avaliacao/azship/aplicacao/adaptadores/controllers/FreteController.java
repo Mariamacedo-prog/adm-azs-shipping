@@ -44,11 +44,11 @@ public class FreteController {
     
     @GetMapping
     public Page<Frete> getAllfrete(
-            @RequestParam(required = false) String destino,
+            @RequestParam(required = false) String search,
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
     	
-        return this.freteServicePort.findAllByOrigem(destino, page, size);
+        return this.freteServicePort.findAllByOrigem(search, page, size);
     }
     
     @PostMapping

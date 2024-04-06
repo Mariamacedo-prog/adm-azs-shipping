@@ -60,7 +60,7 @@ public class FreteRepository implements FreteRepositoryPort{
     }
 
 	@Override
-	public Page<FreteEntity> findAllByOrigem(Pageable pageable, String destino) {
-		return this.springFreteRepository.findAllByOrigem(pageable, destino);
+	public Page<FreteEntity> findAllByOrigem(Pageable pageable, String search) {
+		return this.springFreteRepository.findAllByOrigem(pageable, search);
 	}
 }
