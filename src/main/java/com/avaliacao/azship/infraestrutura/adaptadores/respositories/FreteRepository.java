@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.avaliacao.azship.dominio.Cliente;
@@ -56,4 +58,9 @@ public class FreteRepository implements FreteRepositoryPort{
     public void deleteById(Long id) {
         this.springFreteRepository.deleteById(id);
     }
+
+	@Override
+	public Page<FreteEntity> findAllByOrigem(Pageable pageable, String destino) {
+		return this.springFreteRepository.findAllByOrigem(pageable, destino);
+	}
 }

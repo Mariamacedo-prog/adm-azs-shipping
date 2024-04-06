@@ -3,6 +3,7 @@ package com.avaliacao.azship.aplicacao.adaptadores.controllers;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.avaliacao.azship.dominio.Frete;
@@ -29,16 +31,6 @@ public class FreteController {
         this.freteServicePort = freteServicePort;
     }
 	
-	
-    @GetMapping
-    public ResponseEntity<Object> getAllfrete() {
-    	try {
-    	    List<Frete> freteList = this.freteServicePort.findAll();
-    	    return ResponseEntity.status(HttpStatus.OK).body(freteList);
-    	} catch (Exception e) {
-    	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-    	}
-    }
     
     @GetMapping("/{id}")
     public ResponseEntity<Object> getFreteById(@PathVariable Long id) {
@@ -49,8 +41,16 @@ public class FreteController {
     	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
     	}
     }
-	
-
+    
+    @GetMapping
+    public Page<Frete> getAllfrete(
+            @RequestParam(required = false) String destino,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size) {
+    	
+        return this.freteServicePort.findAllByOrigem(destino, page, size);
+    }
+    
     @PostMapping
     ResponseEntity<Object> saveFrete(@RequestBody FreteDTO freteDTO) {
     	try {
@@ -80,20 +80,4 @@ public class FreteController {
     	}
     }
     
-    @PutMapping("/{id}")
-    ResponseEntity<Object> updateFrete(@PathVariable Long id, @RequestBody FreteDTO freteDTO) {
-        try {
-            Frete frete = freteServicePort.findById(id);
-            if (frete  == null) {
-                return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Frete não encontrado com id: " + id);
-            }
- 
-            System.out.println(id);
-            freteServicePort.saveFrete(freteDTO);
-
-            return ResponseEntity.status(HttpStatus.OK).body("Frete atualizado com sucesso");
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-        }
-    }
 }

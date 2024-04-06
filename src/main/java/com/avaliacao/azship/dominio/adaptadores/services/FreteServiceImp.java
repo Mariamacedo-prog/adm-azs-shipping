@@ -2,10 +2,15 @@ package com.avaliacao.azship.dominio.adaptadores.services;
 
 import java.util.List;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+
 import com.avaliacao.azship.dominio.Frete;
 import com.avaliacao.azship.dominio.dtos.FreteDTO;
 import com.avaliacao.azship.dominio.portas.interfaces.FreteServicePort;
 import com.avaliacao.azship.dominio.portas.repositories.FreteRepositoryPort;
+import com.avaliacao.azship.infraestrutura.adaptadores.entidades.FreteEntity;
 
 public class FreteServiceImp  implements FreteServicePort{
 	private final FreteRepositoryPort freteRepository;
@@ -36,5 +41,14 @@ public class FreteServiceImp  implements FreteServicePort{
     @Override
     public void deleteById(Long id) {
     	this.freteRepository.deleteById(id);                                                                               
+    }
+    
+    @Override
+    public Page<Frete> findAllByOrigem(String destino, int page, int size) {
+        Pageable pageable = PageRequest.of(page, size);
+     
+        return freteRepository.findAllByOrigem(pageable, destino)
+                .map(FreteEntity::toFrete);
+  
     }
 }                                                                                                 
