@@ -20,7 +20,6 @@ public class Frete {
     }
 
     public Frete(FreteDTO freteDTO) {
-     
     	  this.setId(freteDTO.getId());
           this.setCliente(freteDTO.getCliente());
           this.setOrigem(freteDTO.getOrigem());

@@ -1,6 +1,5 @@
 package com.avaliacao.azship.infraestrutura.adaptadores.entidades;
 
-import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.Frete;
 
 import jakarta.persistence.Entity;
@@ -15,7 +14,7 @@ import jakarta.persistence.Table;
 @Table(name = "frete")
 public class FreteEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @ManyToOne

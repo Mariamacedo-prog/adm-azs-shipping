@@ -18,7 +18,7 @@ import jakarta.persistence.Table;
 @Table(name = "atributo_cliente")
 public class AtributoClienteEntity {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
     @ManyToOne

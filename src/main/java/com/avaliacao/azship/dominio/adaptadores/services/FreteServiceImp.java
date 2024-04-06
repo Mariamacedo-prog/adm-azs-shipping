@@ -17,6 +17,7 @@ public class FreteServiceImp  implements FreteServicePort{
     @Override
     public void saveFrete(FreteDTO freteDTO) {
         Frete frete = new Frete(freteDTO);
+    
         this.freteRepository.save(frete);
     }
     

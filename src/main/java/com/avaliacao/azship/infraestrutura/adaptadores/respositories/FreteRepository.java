@@ -29,20 +29,15 @@ public class FreteRepository implements FreteRepositoryPort{
         ClienteEntity clienteById = this.clienteRepository.findById(frete.getCliente())
        		.orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID fornecido: " + frete.getCliente()));
      	
-        FreteEntity freteEntity = new FreteEntity();
-        
-    	if(frete.getId() != null) {
-    		Optional<FreteEntity> opt = this.springFreteRepository.findById(frete.getId());	
-			if (!opt.isPresent()) {
-	       		freteEntity = new FreteEntity(frete,clienteById);	
-	    	} else {
-	       		freteEntity.updateInfo(frete, clienteById);
-			}
-    	}else {
-    		freteEntity = new FreteEntity(frete,clienteById);
-    	}
-    	
-        this.springFreteRepository.save(freteEntity);
+        if (frete.getId() == null) {
+            FreteEntity freteEntity = new FreteEntity(frete, clienteById);
+            this.springFreteRepository.save(freteEntity);
+        } else {
+            Optional<FreteEntity> opt = this.springFreteRepository.findById(frete.getId());
+            FreteEntity freteEntity = opt.orElseThrow(() -> new RuntimeException("Frete não encontrado com o ID fornecido: " + frete.getId()));
+            freteEntity.updateInfo(frete, clienteById);
+            this.springFreteRepository.save(freteEntity);
+        }
     }
     
     @Override
@@ -54,16 +49,11 @@ public class FreteRepository implements FreteRepositoryPort{
     @Override
     public Frete findById(Long id) {
         Optional<FreteEntity> opt = this.springFreteRepository.findById(id);
-
-        if (opt.isPresent())
-            return opt.get().toFrete();
-
-        throw new RuntimeException("Frete não encontrado com o ID: " + id);
+        return opt.orElseThrow(() -> new RuntimeException("Frete not found with ID: " + id)).toFrete();
     }
 
-	@Override
-	public void deleteById(Long id) {
-		 this.springFreteRepository.deleteById(id);
-	}
-    
+    @Override
+    public void deleteById(Long id) {
+        this.springFreteRepository.deleteById(id);
+    }
 }
