@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 
 import com.avaliacao.azship.dominio.AtributoCliente;
 import com.avaliacao.azship.dominio.Cliente;
+import com.avaliacao.azship.dominio.Frete;
 import com.avaliacao.azship.dominio.dtos.AtributoClienteDTO;
 
 import jakarta.persistence.CascadeType;
@@ -29,6 +30,10 @@ public class ClienteEntity {
     private List<AtributoClienteEntity> atributos = new ArrayList<>();
     
     public ClienteEntity() {
+    }
+    
+    public void updateInfo(Cliente cliente) {
+		this.setNome(cliente.getNome());
     }
     
     public Cliente toCliente() {

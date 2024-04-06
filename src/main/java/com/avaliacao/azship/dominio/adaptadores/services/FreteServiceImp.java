@@ -12,6 +12,7 @@ import com.avaliacao.azship.dominio.portas.interfaces.FreteServicePort;
 import com.avaliacao.azship.dominio.portas.repositories.FreteRepositoryPort;
 import com.avaliacao.azship.infraestrutura.adaptadores.entidades.FreteEntity;
 
+
 public class FreteServiceImp  implements FreteServicePort{
 	private final FreteRepositoryPort freteRepository;
 	  
@@ -44,10 +45,10 @@ public class FreteServiceImp  implements FreteServicePort{
     }
     
     @Override
-    public Page<Frete> findAllByOrigem(String search, int page, int size) {
+    public Page<Frete> findAllBySearch(String search, int page, int size) {
         Pageable pageable = PageRequest.of(page, size);
      
-        return freteRepository.findAllByOrigem(pageable, search)
+        return freteRepository.findAllBySearch(pageable, search)
                 .map(FreteEntity::toFrete);
   
     }

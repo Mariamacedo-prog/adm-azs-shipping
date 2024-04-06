@@ -15,9 +15,8 @@ public class Cliente {
     }
 
     public Cliente (ClienteDTO clienteDTO) {
-        Cliente cliente = new Cliente();
-        cliente.setId(clienteDTO.getId());
-        cliente.setNome(clienteDTO.getNome());
+        this.setId(clienteDTO.getId());
+        this.setNome(clienteDTO.getNome());
     }
     
     public static Cliente fromEntity(ClienteEntity clienteEntity) {

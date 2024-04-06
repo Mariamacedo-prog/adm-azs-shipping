@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Component;
 
 import com.avaliacao.azship.dominio.Cliente;
@@ -28,9 +30,16 @@ public class ClienteRepository implements ClienteRepositroyPort {
 	}
 
 	@Override
-	public void save(Cliente cliente) {
-		// TODO Auto-generated method stub
-		
+	public void save(Cliente cliente) {  	
+        if (cliente.getId() == null) {
+        	ClienteEntity clienteEntity = new ClienteEntity(cliente);
+            this.springClienteRepository.save(clienteEntity);
+        } else {
+            Optional<ClienteEntity> opt = this.springClienteRepository.findById(cliente.getId());
+            ClienteEntity clienteEntity = opt.orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID fornecido: " + cliente.getId()));
+            clienteEntity.updateInfo(cliente);
+            this.springClienteRepository.save(clienteEntity);
+        }
 	}
 
 	@Override
@@ -41,6 +50,18 @@ public class ClienteRepository implements ClienteRepositroyPort {
             return opt.get().toCliente();
 
         throw new RuntimeException("Cliente não encontrado com o ID: " + id);
+	}
+
+
+	@Override
+	public void deleteById(Long id) {
+		 this.springClienteRepository.deleteById(id);
+	}
+
+
+	@Override
+	public Page<ClienteEntity> findAllBySearch(Pageable pageable, String search) {
+		return this.springClienteRepository.findAllBySearch(pageable, search);
 	}
 
 }

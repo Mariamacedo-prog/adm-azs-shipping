@@ -7,6 +7,8 @@ import org.springframework.data.domain.Page;
 import com.avaliacao.azship.dominio.Frete;
 import com.avaliacao.azship.dominio.dtos.FreteDTO;
 
+
+
 public interface FreteServicePort {
 	void saveFrete(FreteDTO freteDTO);
 
@@ -16,5 +18,5 @@ public interface FreteServicePort {
 	
 	void deleteById(Long id);
 
-	Page<Frete> findAllByOrigem(String searchTerm, int page, int size);
+	Page<Frete> findAllBySearch(String search, int page, int size);
 }

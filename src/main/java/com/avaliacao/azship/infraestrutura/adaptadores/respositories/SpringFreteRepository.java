@@ -14,5 +14,5 @@ public interface SpringFreteRepository extends JpaRepository<FreteEntity, Long>{
 	@Query(value = "SELECT * FROM frete f WHERE " +
             "f.origem LIKE %?1% OR " +
             "f.destino LIKE %?1% ", nativeQuery = true)
-	Page<FreteEntity> findAllByOrigem(Pageable pageable, String search);
+	Page<FreteEntity> findAllBySearch(Pageable pageable, String search);
 }

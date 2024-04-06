@@ -18,5 +18,5 @@ public interface FreteRepositoryPort {
 	
 	void deleteById(Long id);
 	
-	Page<FreteEntity> findAllByOrigem(Pageable pageable, String search);
+	Page<FreteEntity> findAllBySearch(Pageable pageable, String search);
 }

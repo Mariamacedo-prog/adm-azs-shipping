@@ -1,7 +1,5 @@
 package com.avaliacao.azship.aplicacao.adaptadores.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -10,7 +8,6 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -48,7 +45,7 @@ public class FreteController {
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int size) {
     	
-        return this.freteServicePort.findAllByOrigem(search, page, size);
+        return this.freteServicePort.findAllBySearch(search, page, size);
     }
     
     @PostMapping
@@ -71,7 +68,7 @@ public class FreteController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object>  deleteBeneficiario(@PathVariable Long id) {
+    public ResponseEntity<Object>  deleteFrete(@PathVariable Long id) {
     	try {
     	    this.freteServicePort.deleteById(id);
     	    return ResponseEntity.status(HttpStatus.OK).body("Frete deletado com sucesso!");
