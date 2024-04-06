@@ -51,7 +51,7 @@ public class FreteRepository implements FreteRepositoryPort{
     @Override
     public Frete findById(Long id) {
         Optional<FreteEntity> opt = this.springFreteRepository.findById(id);
-        return opt.orElseThrow(() -> new RuntimeException("Frete not found with ID: " + id)).toFrete();
+        return opt.orElseThrow(() -> new RuntimeException("Frete não encontrado com o ID: " + id)).toFrete();
     }
 
     @Override
