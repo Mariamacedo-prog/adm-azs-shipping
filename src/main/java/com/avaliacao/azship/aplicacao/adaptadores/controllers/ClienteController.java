@@ -24,7 +24,7 @@ public class ClienteController {
 	private ClienteServicePort clienteServicePort;
 
     @Autowired
-    public void ClienteServicePort(ClienteServicePort clienteServicePort) {
+    public ClienteController(ClienteServicePort clienteServicePort) {
         this.clienteServicePort = clienteServicePort;
     }
 	
@@ -64,7 +64,7 @@ public class ClienteController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object>  deleteBeneficiario(@PathVariable Long id) {
+    public ResponseEntity<Object>  deleteCliente(@PathVariable Long id) {
     	try {
     	    this.clienteServicePort.deleteById(id);
     	    return ResponseEntity.status(HttpStatus.OK).body("Cliente deletado com sucesso!");

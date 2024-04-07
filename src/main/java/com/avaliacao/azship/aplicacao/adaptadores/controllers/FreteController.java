@@ -24,7 +24,7 @@ public class FreteController {
     private FreteServicePort freteServicePort;
 
     @Autowired
-    public void FreteServicePort(FreteServicePort freteServicePort) {
+    public FreteController(FreteServicePort freteServicePort) {
         this.freteServicePort = freteServicePort;
     }
 	

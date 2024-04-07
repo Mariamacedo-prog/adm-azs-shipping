@@ -6,9 +6,10 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 import com.avaliacao.azship.infraestrutura.adaptadores.respositories.SpringClienteRepository;
 import com.avaliacao.azship.infraestrutura.adaptadores.respositories.SpringFreteRepository;
+import com.avaliacao.azship.infraestrutura.adaptadores.respositories.SpringAtributoClienteRepository;
 
 @SpringBootApplication
-@EnableJpaRepositories(basePackageClasses =  {SpringFreteRepository.class, SpringClienteRepository.class})
+@EnableJpaRepositories(basePackageClasses =  {SpringFreteRepository.class, SpringClienteRepository.class, SpringAtributoClienteRepository.class})
 public class AzshipApplication {
 
 	public static void main(String[] args) {
