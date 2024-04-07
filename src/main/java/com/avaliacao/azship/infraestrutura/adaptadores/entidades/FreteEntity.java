@@ -1,6 +1,5 @@
 package com.avaliacao.azship.infraestrutura.adaptadores.entidades;
 
-import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.Frete;
 
 import jakarta.persistence.Entity;
