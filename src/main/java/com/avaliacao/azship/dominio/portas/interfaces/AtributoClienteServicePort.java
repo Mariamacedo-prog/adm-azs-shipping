@@ -6,7 +6,6 @@ import com.avaliacao.azship.dominio.AtributoCliente;
 import com.avaliacao.azship.dominio.dtos.AtributoClienteDTO;
 
 public interface AtributoClienteServicePort {
-
 	void save(AtributoClienteDTO atributoclienteDTO);
 
 	AtributoCliente findById(Long id);
@@ -14,5 +13,4 @@ public interface AtributoClienteServicePort {
 	void deleteById(Long id);
 
 	List<AtributoCliente> findByClienteId(Long clienteId);
-
 }

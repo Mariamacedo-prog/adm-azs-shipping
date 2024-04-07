@@ -34,7 +34,7 @@ public class AtributoClienteServiceImp implements AtributoClienteServicePort {
     public void deleteById(Long id) {
     	this.atributoClienteRepository.deleteById(id);                                                                               
     }
-
+    
 	@Override
 	public List<AtributoCliente> findByClienteId(Long clienteId) {
 		return this.atributoClienteRepository.findByClienteId(clienteId); 
