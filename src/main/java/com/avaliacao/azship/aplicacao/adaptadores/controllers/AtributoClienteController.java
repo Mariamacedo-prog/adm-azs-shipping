@@ -62,6 +62,10 @@ public class AtributoClienteController {
     			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Favor preencher Valor corretamente!");
     		}
 
+    		if(atributoDTO.getClienteId() == null ) {
+    			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Favor preencher Cliente Id corretamente!");
+    		}
+    		
     		this.atributoClienteServicePort.save(atributoDTO);
     		
     	    return ResponseEntity.status(HttpStatus.CREATED).body("ok");
@@ -71,9 +75,11 @@ public class AtributoClienteController {
     }
     
     @DeleteMapping("/{id}")
-    public ResponseEntity<Object>  deleteAtributo(@PathVariable Long id) {
+    public ResponseEntity<Object> deleteAtributo(@PathVariable Long id) {
     	try {
-    	    this.atributoClienteServicePort.deleteById(id);
+	
+	   		this.atributoClienteServicePort.deleteById(id);
+   
     	    return ResponseEntity.status(HttpStatus.OK).body("Atributo deletado com sucesso!");
     	} catch (Exception e) {
     	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());

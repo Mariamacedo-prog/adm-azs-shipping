@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.avaliacao.azship.dominio.AtributoCliente;
+import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.dtos.AtributoClienteDTO;
 
 import jakarta.persistence.Entity;
@@ -32,11 +33,24 @@ public class AtributoClienteEntity {
 
     
     public AtributoCliente toAtributoCliente() {
-        return new AtributoCliente(this.id ,this.nome, this.valor);
+        return new AtributoCliente(this.getId() ,this.getNome(), this.getValor(), this.getCliente().getId());
     }
+    
+    public AtributoClienteEntity(AtributoCliente atributo, ClienteEntity clienteById) {
+        this.setId(atributo.getId());
+        this.setNome(atributo.getNome());
+        this.setValor(atributo.getValor());
+        this.setCliente(clienteById);
+    }
+    
+    public void updateInfo(AtributoCliente atributo, ClienteEntity clienteById) {
+ 		this.setNome(atributo.getNome());
+ 		this.setValor(atributo.getValor());
+ 	    this.setCliente(clienteById);
+     }
 
     public AtributoClienteDTO toAtributoClienteDTO() {
-        return new AtributoClienteDTO(this.nome, this.valor);
+        return new AtributoClienteDTO(this.getId(),this.getNome(), this.getValor(), this.getCliente().getId());
     }
     
     public static List<AtributoCliente> toAtributoClienteList(List<AtributoClienteEntity> atributoClienteEntities) {

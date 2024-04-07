@@ -6,14 +6,17 @@ public class AtributoClienteDTO {
 	private Long id;
     private String nome;
     private String valor;
+    private Long clienteId;
     
-	public AtributoClienteDTO(String nome, String valor) {
+	public AtributoClienteDTO(Long id ,String nome, String valor, Long ClienteId) {
+        this.setId(id);
 	    this.setNome(nome);
 	    this.setValor(valor);
+	    this.setClienteId(ClienteId);
 	}
        
     public AtributoCliente toAtributoCliente() {
-        return new AtributoCliente(this.id, this.nome, this.valor);
+        return new AtributoCliente(this.getId(), this.getNome(), this.getValor(), this.getClienteId());
     }
 
 	public String getNome() {
@@ -27,5 +30,17 @@ public class AtributoClienteDTO {
 	}
 	public void setValor(String valor) {
 		this.valor = valor;
+	}
+	public Long getClienteId() {
+		return clienteId;
+	}
+	public void setClienteId(Long clienteId) {
+		this.clienteId = clienteId;
+	}
+	public Long getId() {
+		return id;
+	}
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

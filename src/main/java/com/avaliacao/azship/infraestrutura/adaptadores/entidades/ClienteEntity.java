@@ -27,7 +27,7 @@ public class ClienteEntity {
     
     private String nome;
     
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "cliente")
     private List<AtributoClienteEntity> atributos = new ArrayList<>();
     
     public ClienteEntity() {

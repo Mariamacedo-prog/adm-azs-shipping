@@ -55,7 +55,13 @@ public class ClienteRepository implements ClienteRepositroyPort {
 
 	@Override
 	public void deleteById(Long id) {
-		 this.springClienteRepository.deleteById(id);
+		Optional<ClienteEntity> opt = this.springClienteRepository.findById(id);
+
+        if (opt.isPresent()) {
+          	this.springClienteRepository.delete(opt.get());    	
+        }else {
+        	  throw new RuntimeException("Cliente não encontrado com o ID: " + id);
+        }
 	}
 
 

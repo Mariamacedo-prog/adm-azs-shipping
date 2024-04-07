@@ -7,7 +7,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
-import com.avaliacao.azship.infraestrutura.adaptadores.entidades.FreteEntity;
 
 
 @Repository

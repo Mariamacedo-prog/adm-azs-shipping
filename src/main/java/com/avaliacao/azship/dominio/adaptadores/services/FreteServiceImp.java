@@ -12,7 +12,9 @@ import com.avaliacao.azship.dominio.portas.interfaces.FreteServicePort;
 import com.avaliacao.azship.dominio.portas.repositories.FreteRepositoryPort;
 import com.avaliacao.azship.infraestrutura.adaptadores.entidades.FreteEntity;
 
+import jakarta.transaction.Transactional;
 
+@Transactional
 public class FreteServiceImp  implements FreteServicePort{
 	private final FreteRepositoryPort freteRepository;
 	  

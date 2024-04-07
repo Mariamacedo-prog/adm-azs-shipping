@@ -10,6 +10,6 @@ import com.avaliacao.azship.infraestrutura.adaptadores.entidades.AtributoCliente
 
 @Repository
 public interface SpringAtributoClienteRepository extends JpaRepository<AtributoClienteEntity, Long>{
-	@Query(value = "SELECT * FROM atributo_cliente a WHERE a.cliente_id = ?1", nativeQuery = true)
+	@Query(value = "select * from atributo_cliente a where a.cliente_id = ?1", nativeQuery = true)
 	List<AtributoClienteEntity> findByClienteId(Long clienteId);
 }

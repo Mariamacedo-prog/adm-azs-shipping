@@ -9,8 +9,6 @@ public interface AtributoClienteServicePort {
 
 	void save(AtributoClienteDTO atributoclienteDTO);
 
-	List<AtributoCliente> findAll();
-
 	AtributoCliente findById(Long id);
 
 	void deleteById(Long id);

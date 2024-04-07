@@ -12,6 +12,9 @@ import com.avaliacao.azship.dominio.portas.interfaces.ClienteServicePort;
 import com.avaliacao.azship.dominio.portas.repositories.ClienteRepositroyPort;
 import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
 
+import jakarta.transaction.Transactional;
+
+@Transactional
 public class ClienteServiceImp  implements ClienteServicePort {
 	private final ClienteRepositroyPort clienteRepository;
 	  
