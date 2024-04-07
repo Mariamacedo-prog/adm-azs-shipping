@@ -1,6 +1,8 @@
 package com.avaliacao.azship.aplicacao.adaptadores.controllers;
 
-import org.hibernate.mapping.List;
+
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -39,15 +41,15 @@ public class AtributoClienteController {
     	}
     }
     
-//    @GetMapping("/cliente/{clienteId}")
-//    public ResponseEntity<Object> getAtributoByClienteId(@PathVariable Long clienteId) {
-//    	try {
-//    		List<AtributoCliente> atributo = this.atributoClienteServicePort.findByClienteId(clienteId);
-//    	    return ResponseEntity.status(HttpStatus.OK).body(atributo);
-//    	} catch (Exception e) {
-//    	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
-//    	}
-//    }
+    @GetMapping("/cliente/{clienteId}")
+    public ResponseEntity<Object> getAtributoByClienteId(@PathVariable Long clienteId) {
+    	try {
+    		List<AtributoCliente> atributo = this.atributoClienteServicePort.findByClienteId(clienteId);
+    	    return ResponseEntity.status(HttpStatus.OK).body(atributo);
+    	} catch (Exception e) {
+    	    return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(e.getMessage());
+    	}
+    }
     
     @PostMapping
     ResponseEntity<Object> saveCliente(@RequestBody AtributoClienteDTO atributoDTO) {
