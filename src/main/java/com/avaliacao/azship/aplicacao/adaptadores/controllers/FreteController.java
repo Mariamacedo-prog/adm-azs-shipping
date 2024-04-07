@@ -13,8 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.Frete;
 import com.avaliacao.azship.dominio.dtos.FreteDTO;
+import com.avaliacao.azship.dominio.portas.interfaces.ClienteServicePort;
 import com.avaliacao.azship.dominio.portas.interfaces.FreteServicePort;
 
 @RestController
@@ -22,10 +24,13 @@ import com.avaliacao.azship.dominio.portas.interfaces.FreteServicePort;
 public class FreteController {
 
     private FreteServicePort freteServicePort;
+    
+    private ClienteServicePort clienteServicePort;
 
     @Autowired
-    public FreteController(FreteServicePort freteServicePort) {
+    public FreteController(FreteServicePort freteServicePort, ClienteServicePort clienteServicePort) {
         this.freteServicePort = freteServicePort;
+        this.clienteServicePort = clienteServicePort;  
     }
 	
     
@@ -51,6 +56,8 @@ public class FreteController {
     @PostMapping
     ResponseEntity<Object> saveFrete(@RequestBody FreteDTO freteDTO) {
     	try {
+    		Cliente cliente = this.clienteServicePort.findById(freteDTO.getCliente());
+    		
     		if(freteDTO.getOrigem() == null || freteDTO.getOrigem().isEmpty()) {
     			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Favor preencher Origem corretamente!");
     		}
@@ -59,7 +66,7 @@ public class FreteController {
     			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Favor preencher Destino corretamente!");
     		}
     		
-    		this.freteServicePort.saveFrete(freteDTO);
+    		this.freteServicePort.saveFrete(freteDTO, cliente);
     		
     	    return ResponseEntity.status(HttpStatus.CREATED).body("ok");
     	} catch (Exception e) {

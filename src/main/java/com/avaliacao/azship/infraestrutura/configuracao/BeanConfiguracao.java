@@ -22,8 +22,8 @@ public class BeanConfiguracao {
     }
     
     @Bean
-    ClienteServicePort clienteService(ClienteRepositroyPort clienteServicePort) {
-        return new ClienteServiceImp(clienteServicePort);
+    ClienteServicePort clienteService(ClienteRepositroyPort clienteRepositroyPort) {
+        return new ClienteServiceImp(clienteRepositroyPort);
     }
     
     @Bean

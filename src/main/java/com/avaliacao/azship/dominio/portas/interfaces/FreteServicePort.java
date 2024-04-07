@@ -4,13 +4,14 @@ import java.util.List;
 
 import org.springframework.data.domain.Page;
 
+import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.Frete;
 import com.avaliacao.azship.dominio.dtos.FreteDTO;
 
 
 
 public interface FreteServicePort {
-	void saveFrete(FreteDTO freteDTO);
+	void saveFrete(FreteDTO freteDTO, Cliente cliente);
 
 	List<Frete> findAll();
 

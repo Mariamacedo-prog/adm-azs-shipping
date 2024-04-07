@@ -21,15 +21,15 @@ public class FreteRepository implements FreteRepositoryPort{
     private final SpringFreteRepository springFreteRepository;
     private SpringClienteRepository clienteRepository;
 
-    public FreteRepository(SpringFreteRepository springFreteRepository,SpringClienteRepository clienteRepository) {
+    public FreteRepository(SpringFreteRepository springFreteRepository, SpringClienteRepository clienteRepository) {
         this.springFreteRepository = springFreteRepository;
         this.clienteRepository = clienteRepository;
     }
     
     @Override
     public void save(Frete frete) {
-        ClienteEntity clienteById = this.clienteRepository.findById(frete.getCliente())
-       		.orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID fornecido: " + frete.getCliente()));
+        ClienteEntity clienteById = this.clienteRepository.findById(frete.getCliente().getId())
+       		.orElseThrow(() -> new RuntimeException("Cliente não encontrado com o ID fornecido: " + frete.getCliente().getId()));
      	
         if (frete.getId() == null) {
             FreteEntity freteEntity = new FreteEntity(frete, clienteById);

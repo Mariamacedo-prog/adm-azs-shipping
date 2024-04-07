@@ -6,6 +6,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 
+import com.avaliacao.azship.dominio.Cliente;
 import com.avaliacao.azship.dominio.Frete;
 import com.avaliacao.azship.dominio.dtos.FreteDTO;
 import com.avaliacao.azship.dominio.portas.interfaces.FreteServicePort;
@@ -17,14 +18,14 @@ import jakarta.transaction.Transactional;
 @Transactional
 public class FreteServiceImp  implements FreteServicePort{
 	private final FreteRepositoryPort freteRepository;
-	  
+
     public FreteServiceImp(FreteRepositoryPort freteRepository) {
         this.freteRepository = freteRepository;
     }
     
     @Override
-    public void saveFrete(FreteDTO freteDTO) {
-        Frete frete = new Frete(freteDTO);
+    public void saveFrete(FreteDTO freteDTO,Cliente cliente) {
+        Frete frete = new Frete(freteDTO, cliente);
     
         this.freteRepository.save(frete);
     }
