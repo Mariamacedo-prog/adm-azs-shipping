@@ -11,6 +11,7 @@ import com.avaliacao.azship.dominio.dtos.AtributoClienteDTO;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -26,7 +27,7 @@ public class ClienteEntity {
     
     private String nome;
     
-    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "cliente", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
     private List<AtributoClienteEntity> atributos = new ArrayList<>();
     
     public ClienteEntity() {
@@ -37,7 +38,7 @@ public class ClienteEntity {
     }
     
     public Cliente toCliente() {
-        return new Cliente(this.getId(), this.getNome());
+        return new Cliente(this.getId(), this.getNome(), this.toAtributoClienteModelList());
     }
     
     public ClienteEntity(Cliente cliente) {
@@ -48,19 +49,6 @@ public class ClienteEntity {
     public ClienteEntity(Long id, String nome) {
         this.setId(id);
         this.setNome(nome);
-    }
-
-
-    private List<AtributoCliente> toAtributoClienteList(List<AtributoClienteEntity> atributos) {
-        return atributos.stream()
-                .map(atributoClienteEntity -> atributoClienteEntity.toAtributoCliente())
-                .collect(Collectors.toList());
-    }
-
-    private List<AtributoClienteEntity> toAtributoClienteEntityList(List<AtributoCliente> atributos) {
-        return atributos.stream()
-                .map(atributoCliente -> new AtributoClienteEntity())
-                .collect(Collectors.toList());
     }
     
     public List<AtributoCliente> toAtributoClienteModelList() {

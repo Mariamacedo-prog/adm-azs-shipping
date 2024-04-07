@@ -1,4 +1,6 @@
 package com.avaliacao.azship.dominio;
+import java.util.List;
+
 import com.avaliacao.azship.dominio.dtos.ClienteDTO;
 import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
 
@@ -6,12 +8,14 @@ import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
 public class Cliente {
 	private Long id;
     private String nome;
+    private List<AtributoCliente> atributos;
     
     public Cliente() {}
 
-    public Cliente(Long id, String nome) {
+    public Cliente(Long id, String nome,List<AtributoCliente> atributos) {
         this.setId(id);
         this.setNome(nome);
+        this.setAtributos(atributos);
     }
 
     public Cliente (ClienteDTO clienteDTO) {
@@ -23,7 +27,7 @@ public class Cliente {
         Cliente cliente = new Cliente();
         cliente.setId(clienteEntity.getId());
         cliente.setNome(clienteEntity.getNome());
-
+        cliente.setAtributos(clienteEntity.toAtributoClienteModelList());
         return cliente;
     }
 
@@ -45,5 +49,10 @@ public class Cliente {
 	public void setNome(String nome) {
 		this.nome = nome;
 	}
-
+	public List<AtributoCliente> getAtributos() {
+		return atributos;
+	}
+	public void setAtributos(List<AtributoCliente> atributos) {
+		this.atributos = atributos;
+	}
 }
