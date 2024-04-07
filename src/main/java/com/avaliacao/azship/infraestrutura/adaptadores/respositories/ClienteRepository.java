@@ -17,9 +17,13 @@ import com.avaliacao.azship.infraestrutura.adaptadores.entidades.ClienteEntity;
 public class ClienteRepository implements ClienteRepositroyPort {
 	
     private final SpringClienteRepository springClienteRepository;
+    private SpringAtributoClienteRepository atributoClienteRepository;
+    private SpringFreteRepository freteRepository;
 
-    public ClienteRepository(SpringClienteRepository springClienteRepository) {
+    public ClienteRepository(SpringClienteRepository springClienteRepository, SpringAtributoClienteRepository atributoClienteRepository, SpringFreteRepository freteRepository) {
         this.springClienteRepository = springClienteRepository;
+        this.atributoClienteRepository = atributoClienteRepository;
+        this.freteRepository = freteRepository;
     }
     
 
@@ -58,8 +62,8 @@ public class ClienteRepository implements ClienteRepositroyPort {
 		Optional<ClienteEntity> opt = this.springClienteRepository.findById(id);
 
         if (opt.isPresent()) {
-            this.springClienteRepository.deleteFreteByClienteId(id);
-            this.springClienteRepository.deleteAtributoClienteByClienteId(id);
+            this.freteRepository.deleteFreteByClienteId(id);
+            this.atributoClienteRepository.deleteAtributoClienteByClienteId(id);
             this.springClienteRepository.deleteById(id);   	
         }else {
         	  throw new RuntimeException("Cliente não encontrado com o ID: " + id);
